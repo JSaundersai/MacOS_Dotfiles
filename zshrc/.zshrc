@@ -78,12 +78,13 @@ ZSH_HIGHLIGHT_STYLES[builtin]='fg=white'
 ZSH_HIGHLIGHT_STYLES[precommand]='fg=white'
 ZSH_HIGHLIGHT_STYLES[default]='fg=white'
 
-# Completion styling
+# ===== Completion Styling =====
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 alias cd="z"
@@ -98,9 +99,30 @@ alias ltree="eza --tree --level=2 --long --icons"
 
 # Nvim
 alias n="nvim"
+alias vi="nvim"
+alias vim="nvim"
 
-#Lazygit 
+# Lazygit
 alias lg="lazygit"
+
+# Ripgrep (safe defaults - searches current dir only, excludes common dirs)
+alias rg="rg --color=auto --max-depth 3 --glob '!node_modules' --glob '!.git' --glob '!.venv' --glob '!venv'"
+alias search="rg"
+alias rga="rg --color=auto"  # rga = ripgrep all (no limits)
+
+# Git helpers
+alias ga="git add"
+alias gc="git commit"
+alias gp="git push"
+alias gl="git log --oneline -10"
+alias gd="git diff"
+alias gs="git status"
+alias gb="git branch"
+
+# Utilities
+alias reload="source ~/.zshrc"
+alias c="clear"
+alias mkdir="mkdir -p"
 
 # Pomodoro
 function work () {
@@ -113,19 +135,29 @@ function rest () {
   osascript -e 'display notification "Pomodoro" with title "Break is over! Get back to work 😬" sound name "Crystal"'
 }
 
-# Exported Paths
+# ===== Exported Paths =====
 export ZSH="$HOME/.config/zshrc"
-export GPG_TTY=$(tty)
-export PATH="$PATH:/Users/praveenkumar/FlutterDev/flutter/bin"
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
-export PATH="$PATH:/Users/praveenkumar/istio-1.22.3/bin"
-export CONFIG_DIR="$HOME/.config/lazygit"
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="$HOME/.local/share/zinit/plugins/JanDeDobbeleer/oh-my-posh:$PATH"
 export EDITOR="nvim"
 export XDG_CONFIG_HOME=$HOME/.config
+export GPG_TTY=$(tty)
 
-# Shell integrations
+# Go paths
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+
+# Homebrew
+export PATH="/opt/homebrew/bin:$PATH"
+
+# Oh-my-posh
+export PATH="$HOME/.local/share/zinit/plugins/JanDeDobbeleer/oh-my-posh:$PATH"
+
+# Lazygit config
+export CONFIG_DIR="$HOME/.config/lazygit"
+
+# ===== Shell Integrations =====
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
+
+# ===== Final Notes =====
+# To reload this config: source ~/.zshrc or use 'reload' alias
+# To edit: nvim ~/.zshrc or use 'n ~/.zshrc'
