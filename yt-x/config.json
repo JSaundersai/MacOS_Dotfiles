@@ -1,5 +1,21 @@
 {
   "max_results": 25,
   "region_code": "US",
-  "language": "en"
+  "language": "en",
+  "player": "mpv",
+  "video_quality": "1080",
+  "audio_quality": "192",
+  "download_directory": "~/Videos/yt-x",
+  "enable_preview": true,
+  "image_renderer": "chafa",
+  "preferred_selector": "fzf",
+  "pretty_print": true,
+  "editor": "nvim",
+  "notification_duration": 5,
+  "no_of_recent": 30,
+  "update_recent": true,
+  "search_history": true,
+  "update_check": true,
+  "disown_streaming_process": true,
+  "preferred_browser": "firefox"
 }

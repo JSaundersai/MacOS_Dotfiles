@@ -1,12 +1,12 @@
-if [[ -f "/opt/homebrew/bin/brew" ]] then
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
   # If you're using macOS, you'll want this enabled
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# Oh My Posh 
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/powerlevel10k-custom.yaml)"
-# eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/robbyrussell.yaml)"
-# eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/robbyrussell.omp.json)"
+# Oh My Posh - Initialize prompt with custom config
+if command -v oh-my-posh &> /dev/null; then
+  eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"
+fi
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -141,6 +141,9 @@ export EDITOR="nvim"
 export XDG_CONFIG_HOME=$HOME/.config
 export GPG_TTY=$(tty)
 
+# Local binaries (yt-x, custom scripts, etc.)
+export PATH="$HOME/.local/bin:$PATH"
+
 # Go paths
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
@@ -161,3 +164,4 @@ eval "$(zoxide init zsh)"
 # ===== Final Notes =====
 # To reload this config: source ~/.zshrc or use 'reload' alias
 # To edit: nvim ~/.zshrc or use 'n ~/.zshrc'
+# Installed binaries: ~/.local/bin (yt-x, custom scripts)
