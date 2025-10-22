@@ -1,12 +1,6 @@
 # Qutebrowser Configuration
 # Keyboard-driven, minimal browser
 
-# Load autoconfig.yml if it exists (but our settings take precedence)
-try:
-    config.load_autoconfig()
-except:
-    pass
-
 # ===== Appearance =====
 c.colors.webpage.darkmode.enabled = True
 c.statusbar.show = 'in-mode'
@@ -14,10 +8,9 @@ c.tabs.show = 'switching'
 c.keyhint.delay = 0
 
 # ===== Startup =====
-# Force Perplexity as default (overrides any cached settings)
-c.url.start_pages = ["https://www.perplexity.ai"]
-c.url.default_page = "https://www.perplexity.ai"
-c.url.open_base_url = True
+# Force Perplexity as default
+c.url.start_pages = ["https://www.perplexity.ai/"]
+c.url.default_page = "https://www.perplexity.ai/"
 
 # ===== Tabs =====
 c.tabs.background = True
@@ -37,13 +30,16 @@ c.input.insert_mode.auto_load = True
 
 # ===== Search Engines =====
 c.url.searchengines = {
-    'DEFAULT': 'https://www.google.com/search?q={}',
+    'DEFAULT': 'https://www.perplexity.ai/',
     'g': 'https://www.google.com/search?q={}',
     'gh': 'https://github.com/search?q={}',
     'yt': 'https://www.youtube.com/results?search_query={}',
     'ddg': 'https://duckduckgo.com/?q={}',
     'wiki': 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={}',
 }
+
+# Load autoconfig.yml to preserve UI changes
+config.load_autoconfig()
 
 # ===== Hints =====
 c.hints.chars = 'asdfghjkl'
