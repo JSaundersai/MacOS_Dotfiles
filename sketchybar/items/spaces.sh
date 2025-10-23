@@ -35,7 +35,7 @@ for m in $(aerospace list-monitors | awk '{print $1}'); do
         icon_strip+=" $($PLUGIN_DIR/icons.sh "$app")"
       done <<<"${apps}"
     else
-      icon_strip=" —"
+      icon_strip=""
     fi
 
     sketchybar --set space.$sid label="$icon_strip"
