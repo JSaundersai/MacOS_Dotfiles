@@ -97,7 +97,6 @@ return {
   {
     "L3MON4D3/LuaSnip",
     event = "InsertEnter",
-    build = "make install_jsregexp",
     config = function()
       require("luasnip").config.set_config({
         history = true,
@@ -163,13 +162,14 @@ return {
     end,
   },
 
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
-    cond = function()
-      return vim.fn.executable("make") == 1
-    end,
-  },
+  -- Disabled: causes git issues
+  -- {
+  --   "nvim-telescope/telescope-fzf-native.nvim",
+  --   build = "make",
+  --   cond = function()
+  --     return vim.fn.executable("make") == 1
+  --   end,
+  -- },
 
   {
     "nvim-tree/nvim-tree.lua",
@@ -280,8 +280,13 @@ return {
   },
 
   {
+    "nvim-neotest/nvim-nio",
+    event = "VeryLazy",
+  },
+
+  {
     "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap" },
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     config = function()
       require("dapui").setup()
       local dap = require("dap")
@@ -298,16 +303,17 @@ return {
   },
 
   -- ===== AI Agent (OpenCode) =====
-  {
-    "NickvanDyke/opencode.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "folke/snacks.nvim",
-    },
-    config = function()
-      require("plugins.opencode")
-    end,
-  },
+  -- Disabled: causes git issues
+  -- {
+  --   "NickvanDyke/opencode.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "folke/snacks.nvim",
+  --   },
+  --   config = function()
+  --     require("plugins.opencode")
+  --   end,
+  -- },
 
   -- ===== Icons =====
   {
