@@ -1,3 +1,6 @@
 #!/bin/bash
 
-sketchybar --set $NAME label="$(date +'%a %d %b %I:%M %p')"
+DATE=$(date '+%a %b %d')
+TIME=$(date '+%H:%M')
+
+sketchybar --set calendar label="$TIME  $DATE"

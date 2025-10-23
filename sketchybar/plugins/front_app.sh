@@ -1,35 +1,33 @@
-#!/bin/sh
+#!/bin/bash
 
-# Some events send additional information specific to the event in the $INFO
-# variable. E.g. the front_app_switched event sends the name of the newly
-# focused application in the $INFO variable:
-# https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
+source "$CONFIG_DIR/plugins/icon_map.sh"
 
-app_switched() {
-  for m in $(aerospace list-monitors | awk '{print $1}'); do
-    for sid in $(aerospace list-workspaces --monitor $m --visible); do
-      
-      apps=$( (echo "$INFO"; aerospace list-windows --monitor "$m" --workspace "$sid" \
-      | awk -F '|' '{gsub(/^ *| *$/, "", $2); print $2}') \
-      | awk '!seen[$0]++' | sort)
+# Get the frontmost app using AppleScript
+FRONT_APP=$(osascript -e 'tell application "System Events" to name of first application process whose frontmost is true')
 
-      icon_strip=""
-      if [ "${apps}" != "" ]; then
-        while read -r app; do
-          icon_strip+=" $($CONFIG_DIR/plugins/icons.sh "$app")"
-        done <<<"${apps}"
-      else
-        icon_strip=" —"
-      fi
-
-      sketchybar --animate sin 10 --set space.$sid label="$icon_strip"
-    done
-  done
-}
-
-if [ "$SENDER" = "front_app_switched" ]; then
-
-  sketchybar --set $NAME label="$INFO" icon="$($CONFIG_DIR/plugins/icons.sh "$INFO")"
-
-  app_switched
+# Handle Electron apps - check for common ones
+if [ "$FRONT_APP" = "Electron" ]; then
+  # Try to get the actual app name from the window title or bundle identifier
+  FRONT_APP=$(osascript -e 'tell application "System Events"
+    set frontApp to first application process whose frontmost is true
+    set appName to name of frontApp
+    if appName is "Electron" then
+      try
+        set appPath to path of frontApp
+        if appPath contains "Windsurf" then
+          return "Windsurf"
+        else if appPath contains "Cursor" then
+          return "Cursor"
+        end if
+      end try
+    end if
+    return appName
+  end tell')
 fi
+
+# Get icon for the app
+__icon_map "$FRONT_APP"
+APP_ICON="$icon_result"
+
+# Update the item with icon and label
+sketchybar --set front_app icon="$APP_ICON" label="$FRONT_APP"

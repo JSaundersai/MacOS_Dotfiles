@@ -1,27 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
-# Check if WiFi is connected by looking for active connection
-WIFI_INFO=$(system_profiler SPAirPortDataType 2>/dev/null)
+# Check if WiFi is connected
+STATUS=$(system_profiler SPAirPortDataType 2>/dev/null | grep -i "status: connected")
 
-# Check if we have a current network connection
-if echo "$WIFI_INFO" | grep -q "Current Network Information:"; then
-  # Check if the SSID line exists and is not empty
-  SSID_LINE=$(echo "$WIFI_INFO" | awk '/Current Network Information:/ { getline; print; exit }')
+if [ -n "$STATUS" ]; then
+  # Get signal strength
+  SIGNAL=$(system_profiler SPAirPortDataType 2>/dev/null | grep "Signal / Noise" | head -1 | awk '{print $3, $4, $5}')
   
-  # Extract SSID, handling both redacted and normal cases
-  SSID=$(echo "$SSID_LINE" | sed 's/^[[:space:]]*//' | sed 's/:$//')
-  
-  if [ "$SSID" = "<redacted>" ]; then
-    # Connected but SSID is redacted - show connected status
-    sketchybar --set $NAME icon="􀙇" label="Connected"
-  elif [ -n "$SSID" ] && [ "$SSID" != "" ]; then
-    # Show actual SSID
-    sketchybar --set $NAME icon="􀙇" label="$SSID"
+  if [ -n "$SIGNAL" ]; then
+    sketchybar --set wifi icon=󰤨 label="$SIGNAL"
   else
-    # No SSID found
-    sketchybar --set $NAME icon="􀙈" label="Disconnected"
+    sketchybar --set wifi icon=󰤨 label="Connected"
   fi
 else
-  # No WiFi connection
-  sketchybar --set $NAME icon="􀙈" label="Disconnected"
+  sketchybar --set wifi icon=󰤮 label="No WiFi"
 fi

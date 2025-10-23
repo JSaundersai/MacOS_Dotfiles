@@ -1,9 +1,11 @@
 #!/bin/bash
 
-USAGE="$(memory_pressure | grep "System-wide memory free percentage:" | awk '{ printf("%02.0f\n", 100-$5"%") }')%"
-
 sketchybar --add item memory right \
-  --set memory update_freq=15 \
-  icon=􀧖 \
-  label="$USAGE" \
-  script="$PLUGIN_DIR/memory.sh"
+  --set memory \
+    icon= \
+    background.width=50 \
+    icon.padding_right=6 \
+    label.padding_left=4 \
+    label.padding_right=8 \
+    update_freq=2 \
+    script="$PLUGIN_DIR/memory.sh"

@@ -1,42 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 
-source "$CONFIG_DIR/colors.sh"
+BATTERY=$(pmset -g batt | grep -Eo '\d+%' | cut -d% -f1)
+STATUS=$(pmset -g batt | grep "AC Power" | awk '{print $NF}')
 
-PERCENTAGE=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
-CHARGING=$(pmset -g batt | grep 'AC Power')
-
-if [ $PERCENTAGE = "" ]; then
-  exit 0
+if [ "$STATUS" = "connected" ]; then
+  ICON="󰂄"
+else
+  if [ "$BATTERY" -gt 80 ]; then
+    ICON="󰁹"
+  elif [ "$BATTERY" -gt 60 ]; then
+    ICON="󰂂"
+  elif [ "$BATTERY" -gt 40 ]; then
+    ICON="󰂁"
+  elif [ "$BATTERY" -gt 20 ]; then
+    ICON="󰂀"
+  else
+    ICON="󰂃"
+  fi
 fi
 
-case ${PERCENTAGE} in
-9[0-9] | 100)
-  ICON="􀛨"
-  COLOR=$ITEM_COLOR
-  ;;
-[6-8][0-9])
-  ICON="􀺸"
-  COLOR=$ITEM_COLOR
-  ;;
-[3-5][0-9])
-  ICON="􀺶"
-  COLOR="0xFFd97706"
-  ;;
-[1-2][0-9])
-  ICON="􀛩"
-  COLOR="0xFFf97316"
-  ;;
-*)
-  ICON="􀛪"
-  COLOR="0xFFef4444"
-  ;;
-esac
-
-if [[ $CHARGING != "" ]]; then
-  ICON="􀢋"
-  COLOR=$ITEM_COLOR
-fi
-
-# The item invoking this script (name $NAME) will get its icon and label
-# updated with the current battery status
-sketchybar --set $NAME icon="$ICON" label="${PERCENTAGE}%" icon.color="$COLOR"
+sketchybar --set battery icon="$ICON" label="${BATTERY}%"
