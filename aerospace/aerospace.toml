@@ -31,7 +31,7 @@ start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
-enable-normalization-opposite-orientation-for-nested-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = false
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
@@ -44,7 +44,7 @@ default-root-container-layout = 'tiles'
 # Possible values: horizontal|vertical|auto
 # 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
 #               tall monitor (anything higher than wide) gets vertical orientation
-default-root-container-orientation = 'vertical'
+default-root-container-orientation = 'horizontal'
 
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -114,18 +114,18 @@ alt-shift-l = 'move right'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
+alt-1 = ['workspace 1', 'layout tiles horizontal']
+alt-2 = ['workspace 2', 'layout tiles horizontal']
+alt-3 = ['workspace 3', 'layout tiles horizontal']
 alt-4 = 'workspace 4'
 alt-5 = 'workspace 5'
 alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
-alt-d = 'workspace D' # For Discord
-alt-t = ['workspace T', 'layout tiles vertical horizontal', 'exec-and-forget ~/dotfiles_new/aerospace/toggle-kitty.sh'] # For Kitty (Terminal)
-alt-w = 'workspace W' # For Windsurf
+alt-d = ['workspace D', 'layout tiles horizontal'] # For Discord
+alt-t = ['workspace T', 'layout tiles horizontal', 'exec-and-forget ~/dotfiles_new/aerospace/toggle-kitty.sh'] # For Kitty (Terminal)
+alt-w = ['workspace W', 'layout tiles horizontal'] # For Windsurf
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
