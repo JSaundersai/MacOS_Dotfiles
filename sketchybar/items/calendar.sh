@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sketchybar --add item calendar right \
+  --set calendar icon=􀧞 \
+  update_freq=15 \
+  script="$PLUGIN_DIR/calendar.sh" \
+  --move calendar after wifi
