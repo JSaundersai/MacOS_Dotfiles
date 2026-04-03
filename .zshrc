@@ -8,10 +8,16 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # -- Sourcing Modular Configs --
 # Load all .zsh files from ~/.config/zsh/
-for config in ~/dotfiles/.config/zsh/*.zsh(N); do
-    source "$config"
-done
-unset config
+ZSH_CONFIG_DIR="$HOME/dotfiles/.config/zsh"
+if [[ -d "$ZSH_CONFIG_DIR" ]]; then
+    for config_file in "$ZSH_CONFIG_DIR"/*.zsh; do
+        if [[ -f "$config_file" ]]; then
+            source "$config_file"
+        fi
+    done
+    unset config_file
+fi
+unset ZSH_CONFIG_DIR
 
 # -- Oh My Zsh Settings (only if installed) --
 if [[ -d "$ZSH" ]]; then
