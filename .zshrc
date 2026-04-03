@@ -13,25 +13,30 @@ for config in ~/dotfiles/.config/zsh/*.zsh(N); do
 done
 unset config
 
-# -- Oh My Zsh Settings --
-# Theme is disabled (using Starship instead)
-# ZSH_THEME="robbyrussell"
+# -- Oh My Zsh Settings (only if installed) --
+if [[ -d "$ZSH" ]]; then
+    # Theme is disabled (using Starship instead)
+    # ZSH_THEME="robbyrussell"
 
-# Update frequency (14 days)
-zstyle ':omz:update' frequency 14
+    # Update frequency (14 days)
+    zstyle ':omz:update' frequency 14
 
-# -- Plugins --
-plugins=(
-    git
-    colored-man-pages
-    macos
-    brew
-    npm
-    node
-    gh
-)
+    # -- Plugins --
+    plugins=(
+        git
+        colored-man-pages
+        macos
+        brew
+        npm
+        node
+        gh
+    )
 
-source $ZSH/oh-my-zsh.sh
+    source $ZSH/oh-my-zsh.sh
+else
+    echo "⚠️  Oh My Zsh not found. Install with:"
+    echo "   sh -c \"\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+fi
 
 # -- External Plugins (Brew-installed) --
 # Autosuggestions
@@ -52,6 +57,9 @@ fi
 # -- Starship Prompt --
 if command -v starship &> /dev/null; then
     eval "$(starship init zsh)"
+# Fallback simple prompt if starship not installed
+elif [[ ! -d "$ZSH" ]]; then
+    PROMPT='%n@%m %~ %% '
 fi
 
 # -- FZF (if installed) --
