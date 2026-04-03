@@ -1,0 +1,128 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# -- Prompt Format --
+# [N] [Git] [Language] [Directory] 
+# $                                            
+
+format = """\
+[░▒▓](bg:#090c0c fg:#1d202f)[  ](bg:#090c0c fg:#1d202f)$username[  ](bg:#090c0c fg:#1d202f)[▓▒░](bg:#24283b fg:#090c0c)\
+$directory\
+$git_branch$git_status\
+$nodejs$python$rust$go$lua
+[└─>](fg:#7aa2f7) 
+"""
+
+right_format = """
+$cmd_duration$time
+"""
+
+# -- Palette: Tokyo Night Storm --
+palette = "tokyo_night"
+
+[palettes.tokyo_night]
+black = "#1d202f"
+blue = "#7aa2f7"
+cyan = "#7dcfff"
+green = "#9ece6a"
+magenta = "#bb9af7"
+red = "#f7768e"
+white = "#a9b1d6"
+yellow = "#e0af68"
+gray = "#414868"
+dark_blue = "#24283b"
+bright_white = "#c0caf5"
+
+# -- Modules --
+
+[username]
+show_always = true
+style_user = "bg:#090c0c fg:#7aa2f7 bold"
+style_root = "bg:#090c0c fg:#f7768e bold"
+format = "[$user]($style)"
+disabled = false
+
+[directory]
+style = "fg:#c0caf5 bg:#24283b"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = "~"
+read_only = " "
+read_only_style = "fg:#f7768e bg:#24283b"
+
+[git_branch]
+symbol = ""
+style = "fg:#7aa2f7 bg:#24283b"
+format = "[ $symbol $branch ]($style)"
+
+[git_status]
+style = "fg:#e0af68 bg:#24283b"
+format = "[($all_status$ahead_behind )]($style)"
+up_to_date = "✓"
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+conflicted = "="
+
+[nodejs]
+symbol = ""
+style = "fg:#9ece6a bg:#24283b"
+format = "[ $symbol ($version) ]($style)"
+detect_extensions = ["js", "mjs", "cjs", "ts", "tsx", "json", "jsx"]
+detect_files = ["package.json", ".node-version"]
+
+[python]
+symbol = ""
+style = "fg:#7dcfff bg:#24283b"
+format = "[ $symbol ($version) ]($style)"
+python_binary = ["python3", "python"]
+detect_extensions = ["py"]
+detect_files = [".python-version", "Pipfile", "pyproject.toml", "setup.py", "requirements.txt"]
+
+[rust]
+symbol = "󱘗"
+style = "fg:#e0af68 bg:#24283b"
+format = "[ $symbol ($version) ]($style)"
+detect_files = ["Cargo.toml"]
+
+[go]
+symbol = ""
+style = "fg:#7dcfff bg:#24283b"
+format = "[ $symbol ($version) ]($style)"
+detect_files = ["go.mod", "go.work"]
+
+[lua]
+symbol = ""
+style = "fg:#7aa2f7 bg:#24283b"
+format = "[ $symbol ($version) ]($style)"
+detect_files = [".lua-version"]
+
+[cmd_duration]
+min_time = 500
+style = "fg:#bb9af7"
+format = "[ took $duration ]($style)"
+show_notifications = false
+
+[time]
+disabled = false
+time_format = "%H:%M"
+style = "fg:#414868"
+format = "[ $time ]($style)"
+
+[character]
+success_symbol = "[❯](fg:#9ece6a)"
+error_symbol = "[❯](fg:#f7768e)"
+vimcmd_symbol = "[❮](fg:#7aa2f7)"
+
+[line_break]
+disabled = false
+
+[status]
+disabled = true
+

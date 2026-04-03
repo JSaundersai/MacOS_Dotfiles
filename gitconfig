@@ -1,0 +1,103 @@
+# =========================================================
+#  GIT CONFIGURATION
+#  Jared Alesko
+# =========================================================
+
+[user]
+    name = Jared
+    email = Jared@alesko.ai
+
+[init]
+    defaultBranch = main
+
+[core]
+    editor = nvim
+    autocrlf = input
+    safecrlf = true
+    
+[push]
+    default = simple
+    autoSetupRemote = true
+    
+[pull]
+    rebase = false
+    
+[fetch]
+    prune = true
+    
+[merge]
+    tool = vimdiff
+    
+[diff]
+    tool = vimdiff
+    colorMoved = zebra
+    
+[color]
+    ui = auto
+    
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+    
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[alias]
+    # Status
+    st = status
+    s = status -s
+    
+    # Commit
+    ci = commit
+    c = commit -m
+    ca = commit -am
+    amend = commit --amend
+    
+    # Branch
+    br = branch
+    ba = branch -a
+    bd = branch -d
+    bD = branch -D
+    co = checkout
+    cb = checkout -b
+    
+    # Log
+    lg = log --oneline --decorate --graph
+    lga = log --oneline --decorate --graph --all
+    last = log -1 HEAD --stat
+    
+    # Diff
+    d = diff
+    dc = diff --cached
+    
+    # Stash
+    ss = stash
+    sl = stash list
+    sp = stash pop
+    
+    # Remote
+    rv = remote -v
+    fetchall = fetch --all
+    
+    # Useful
+    unstage = reset HEAD --
+    discard = checkout --
+    uncommit = reset --soft HEAD^
+    
+[credential]
+    helper = osxkeychain
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true

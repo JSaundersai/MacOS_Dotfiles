@@ -1,0 +1,100 @@
+# =========================================================
+#  GHOSTTY CONFIGURATION
+#  Tokyo Night Theme + JetBrains Mono
+# =========================================================
+
+# -- Font Configuration --
+font-family = "JetBrains Mono"
+font-size = 13
+font-thicken = true
+
+# -- Window Configuration --
+window-padding-x = 10
+window-padding-y = 10
+window-save-state = always
+window-decoration = auto
+macos-titlebar-style = transparent
+
+# -- Cursor Configuration --
+cursor-style = block
+cursor-color = #7aa2f7
+cursor-text = #1a1b26
+cursor-click-to-move = true
+
+# -- Color Scheme: Tokyo Night Storm --
+# Background & foreground
+background = #24283b
+foreground = #a9b1d6
+
+# ANSI colors
+palette = 0=#1d202f
+palette = 1=#f7768e
+palette = 2=#9ece6a
+palette = 3=#e0af68
+palette = 4=#7aa2f7
+palette = 5=#bb9af7
+palette = 6=#7dcfff
+palette = 7=#a9b1d6
+palette = 8=#414868
+palette = 9=#f7768e
+palette = 10=#9ece6a
+palette = 11=#e0af68
+palette = 12=#7aa2f7
+palette = 13=#bb9af7
+palette = 14=#7dcfff
+palette = 15=#c0caf5
+
+# Selection colors
+selection-background = #364a82
+selection-foreground = #c0caf5
+
+# -- Scrollback Configuration --
+scrollback-limit = 10000000
+
+# -- Performance Configuration --
+auto-update = check
+auto-update-channel = stable
+
+# -- Shell Configuration --
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title
+
+# -- Keybindings (Vim-style) --
+# Quick new tab/split
+keybind = cmd+t=new_tab
+keybind = cmd+shift+d=new_split:right
+keybind = cmd+d=new_split:down
+
+# Navigate splits
+keybind = cmd+h=goto_split:left
+keybind = cmd+j=goto_split:down
+keybind = cmd+k=goto_split:up
+keybind = cmd+l=goto_split:right
+
+# Font size adjustments
+keybind = cmd+plus=increase_font_size:1
+keybind = cmd+minus=decrease_font_size:1
+keybind = cmd+0=reset_font_size
+
+# Toggle fullscreen
+keybind = cmd+return=toggle_fullscreen
+
+# Quick clear
+keybind = cmd+k=clear_screen
+
+# Copy/paste (macOS defaults)
+# cmd+c and cmd+v work by default
+
+# -- Mouse Configuration --
+mouse-hide-while-typing = true
+mouse-scroll-multiplier = 1
+
+# -- Link Configuration --
+link-url = true
+
+# -- Working Directory --
+working-directory = inherit
+window-inherit-working-directory = true
+
+# -- Quit Behavior --
+quit-after-last-window-closed = false
