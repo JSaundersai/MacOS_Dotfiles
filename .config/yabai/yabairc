@@ -1,0 +1,193 @@
+#!/bin/bash
+# =========================================================
+#  YABAI CONFIGURATION - Hyprland-inspired Tiling WM
+#  macOS Window Manager with Hyprland-like features
+# =========================================================
+
+# Load scripting addition (required for some features)
+# NOTE: Requires sudoers configuration - see below
+# sudo yabai --load-sa
+
+# =========================================================
+#  LAYOUT CONFIGURATION (BSP = Binary Space Partitioning)
+#  Similar to Hyprland's dwindle layout
+# =========================================================
+
+# Use BSP layout (like Hyprland's dwindle)
+yabai -m config layout bsp
+
+# New windows become second child (splitting existing windows)
+yabai -m config window_placement second_child
+
+# Auto-balance windows (similar to Hyprland's preserve_split)
+yabai -m config auto_balance off
+
+# =========================================================
+#  GAPS & PADDING (Hyprland-style aesthetics)
+# =========================================================
+
+# Window gaps (inner)
+yabai -m config window_gap 12
+
+# Screen padding (outer)
+yabai -m config top_padding 10
+yabai -m config bottom_padding 10
+yabai -m config left_padding 10
+yabai -m config right_padding 10
+
+# =========================================================
+#  MOUSE SETTINGS (Hyprland-style mouse behavior)
+# =========================================================
+
+# Mouse follows focus (like Hyprland's follow_mouse = 1)
+# When you switch windows with keyboard, mouse jumps to center of window
+# Set to 'off' if you don't want mouse jumping around
+yabai -m config mouse_follows_focus off
+
+# Focus follows mouse (sloppy focus)
+# 'autofocus' = focus window when mouse enters (default)
+# 'autoraise' = focus AND raise window when mouse enters (more aggressive)
+# 'off' = disable sloppy focus (click to focus only)
+yabai -m config focus_follows_mouse autofocus
+
+# Mouse modifier key (Alt = Option on Mac)
+yabai -m config mouse_modifier alt
+
+# Left mouse button + drag = move window
+yabai -m config mouse_action1 move
+
+# Right mouse button + drag = resize window
+yabai -m config mouse_action2 resize
+
+# =========================================================
+#  WINDOW SETTINGS
+# =========================================================
+
+# Window shadow (macOS native, disable for cleaner look)
+yabai -m config window_shadow off
+
+# Window opacity (transparency)
+yabai -m config window_opacity off
+yabai -m config active_window_opacity 1.0
+yabai -m config normal_window_opacity 0.95
+
+# Split ratio (balance)
+yabai -m config split_ratio 0.50
+
+# =========================================================
+#  SPACE/WORKSPACE SETTINGS
+# =========================================================
+
+# Focus follows space switching
+yabai -m config focus_follows_space on
+
+# =========================================================
+#  WINDOW RULES (Float certain apps like Hyprland)
+# =========================================================
+
+# System apps - always float
+yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^System Information$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Preview$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Console$" manage=off
+yabai -m rule --add app="^Disk Utility$" manage=off
+yabai -m rule --add app="^Time Machine$" manage=off
+yabai -m rule --add app="^Archive Utility$" manage=off
+yabai -m rule --add app="^Installer$" manage=off
+yabai -m rule --add app="^Software Update$" manage=off
+
+# Utilities - float
+yabai -m rule --add app="^Stickies$" manage=off
+yabai -m rule --add app="^Photo Booth$" manage=off
+yabai -m rule --add app="^Voice Memos$" manage=off
+yabai -m rule --add app="^QuickTime Player$" manage=off
+
+# Communication apps - float (optional, comment out to tile)
+yabai -m rule --add app="^Messages$" manage=off
+yabai -m rule --add app="^Slack$" manage=off
+yabai -m rule --add app="^Discord$" manage=off
+yabai -m rule --add app="^WhatsApp$" manage=off
+yabai -m rule --add app="^Telegram$" manage=off
+yabai -m rule --add app="^Signal$" manage=off
+
+# Media apps - float (optional)
+yabai -m rule --add app="^Spotify$" manage=off
+yabai -m rule --add app="^Music$" manage=off
+yabai -m rule --add app="^TV$" manage=off
+yabai -m rule --add app="^Podcasts$" manage=off
+
+# Development tools - float
+yabai -m rule --add app="^Simulator$" manage=off
+yabai -m rule --add app="^Instruments$" manage=off
+
+# VPN/Network - float
+yabai -m rule --add app="^Proton VPN$" manage=off
+yabai -m rule --add app="^TunnelBear$" manage=off
+yabai -m rule --add app="^NordVPN$" manage=off
+
+# Games - float (usually better)
+yabai -m rule --add app="^Steam$" manage=off
+yabai -m rule --add app="^Battle.net$" manage=off
+yabai -m rule --add app="^Epic Games Launcher$" manage=off
+yabai -m rule --add app="^GeForce NOW$" manage=off
+
+# Password managers - float
+yabai -m rule --add app="^1Password$" manage=off
+yabai -m rule --add app="^Bitwarden$" manage=off
+yabai -m rule --add app="^KeePassXC$" manage=off
+
+# Window titles - float (dialogs, popups)
+yabai -m rule --add title="^(Preferences|Settings|Options)$" manage=off
+yabai -m rule --add title="^(Open|Save|Print)$" manage=off
+yabai -m rule --add title="^Copy$" manage=off
+yabai -m rule --add title="^Connect to Server$" manage=off
+yabai -m rule --add title="^Move to$" manage=off
+yabai -m rule --add title="^Quit$" manage=off
+yabai -m rule --add title="^Minimize$" manage=off
+
+# Subwindows - float
+yabai -m rule --add subrole="^AXDialog$" manage=off
+yabai -m rule --add subrole="^AXSheet$" manage=off
+yabai -m rule --add subrole="^AXSystemDialog$" manage=off
+
+# Specific window sizes - float small windows
+yabai -m rule --add width=\<500 manage=off
+yabai -m rule --add height=\<300 manage=off
+
+# =========================================================
+#  EXTERNAL BAR (SketchyBar integration)
+#  Reserve space for status bar
+# =========================================================
+
+yabai -m config external_bar all:36:0
+
+# =========================================================
+#  BORDERS (JankyBorders integration)
+#  Active window highlight like Hyprland
+# =========================================================
+
+# If you install jankyborders:
+# borders active_color=0xff7aa2f7 inactive_color=0xff414868 width=5.0 &
+# Tokyo Night blue: #7aa2f7, dark: #414868
+
+# =========================================================
+#  DEBUG (Enable for troubleshooting)
+# =========================================================
+
+# yabai -m config debug_output on
+
+# =========================================================
+#  SIGNALS (Fix overlap/race when new windows appear)
+# =========================================================
+
+# Force space rebalance when a new window is created (fixes overlap)
+yabai -m signal --add event=window_created action="yabai -m space --balance"
+
+# Re-tile when a window is destroyed (reclaim space)
+yabai -m signal --add event=window_destroyed action="yabai -m space --balance"
+
+echo "yabai configuration loaded..."
